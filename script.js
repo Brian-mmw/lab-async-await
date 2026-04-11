@@ -1,25 +1,30 @@
 // Write your code here!
-const bookList = document.getElementById("posts");
+const ul = document.getElementById('post-list');
 
-function renderBooks(booksArray) {
-  booksArray.slice(0, 5).forEach(book => {
-    const h3 = document.createElement('h3');
+function displayPosts(posts) {
+  posts.forEach(post => {
+    const li = document.createElement('li');
+
+    const h1 = document.createElement('h1');
+    h1.textContent = post.title;
+
     const p = document.createElement('p');
+    p.textContent = post.body;
 
-    h3.textContent = book.title;
-    p.textContent = book.body;
-
-    bookList.appendChild(h3);
-    bookList.appendChild(p);
+    li.appendChild(h1);
+    li.appendChild(p);
+    ul.appendChild(li);
   });
 }
 
-// Fetch data and call function properly
-async function getPosts() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const data = await res.json();
-
-  renderBooks(data); // ✅ FIX: pass data directly
+async function fetchPosts() {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const data = await response.json();
+    displayPosts(data);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
-getPosts();
+fetchPosts();
