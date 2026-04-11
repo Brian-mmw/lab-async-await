@@ -1,5 +1,5 @@
 // Write your code here!
-const bookList = document.getElementById("book-list");
+const bookList = document.getElementById("posts");
 
 function renderBooks(booksArray) {
   booksArray.slice(0, 5).forEach(book => {
