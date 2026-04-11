@@ -1,21 +1,25 @@
 // Write your code here!
-const bookList = document.querySelector('#book-list');
+const bookList = document.getElementById("book-list");
+
 function renderBooks(booksArray) {
-    booksArray.forEach(book => {
-        // Create the elements
-        const h3 = document.createElement('h3');
-        const p = document.createElement('p');
-        const img = document.createElement('img');
+  booksArray.slice(0, 5).forEach(book => {
+    const h3 = document.createElement('h3');
+    const p = document.createElement('p');
 
-        // Add the content from the book object
-        h3.textContent = book.title;
-        p.textContent = book.author;
-        img.src = book.imageUrl; // Make sure 'U' is capitalized!
+    h3.textContent = book.title;
+    p.textContent = book.body;
 
-        // Put them inside the book-list div
-        bookList.appendChild(h3);
-        bookList.appendChild(p);
-        bookList.appendChild(img);
-    });
+    bookList.appendChild(h3);
+    bookList.appendChild(p);
+  });
 }
-renderBooks(bookStore.books);
+
+// Fetch data and call function properly
+async function getPosts() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const data = await res.json();
+
+  renderBooks(data); // ✅ FIX: pass data directly
+}
+
+getPosts();
