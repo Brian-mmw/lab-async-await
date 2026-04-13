@@ -15,28 +15,25 @@ function displayPosts(posts) {
     const p = document.createElement('p');
     p.textContent = post.body;
 
-    // ✅ Correct order: append to li FIRST
     li.appendChild(h1);
     li.appendChild(p);
-
-    // ✅ THEN append li to ul
     ul.appendChild(li);
   });
 }
 
-// Async function to fetch posts
+// Async function to fetch data
 async function fetchPosts() {
   try {
     const response = await fetch('https://jsonplaceholder.typicode.com/posts');
     const data = await response.json();
 
-    // ✅ IMPORTANT: call displayPosts
+    // 🚨 THIS WAS MISSING
     displayPosts(data);
 
   } catch (error) {
-    console.error('Error fetching posts:', error);
+    console.error(error);
   }
 }
 
-// ✅ IMPORTANT: call the function
+// Call the function
 fetchPosts();
