@@ -3,20 +3,18 @@
 const ul = document.getElementById('post-list');
 
 function displayPosts(posts) {
-  ul.innerHTML = "";
+  const container = document.getElementById('posts'); // 👈 NOT ul
+  container.innerHTML = "<h1>Posts</h1>"; // reset but keep heading
 
   posts.forEach(post => {
-    const li = document.createElement('li');
-
     const h1 = document.createElement('h1');
     h1.textContent = post.title;
 
     const p = document.createElement('p');
     p.textContent = post.body;
 
-    li.appendChild(h1);
-    li.appendChild(p);
-    ul.appendChild(li);
+    container.appendChild(h1);
+    container.appendChild(p);
   });
 }
 async function fetchPosts() {
